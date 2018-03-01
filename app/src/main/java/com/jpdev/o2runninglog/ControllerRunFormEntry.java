@@ -122,7 +122,6 @@ public class ControllerRunFormEntry {
         values.put(O2RunningLogContract.RunsEntry.DATE, id.getDate());
         values.put(O2RunningLogContract.RunsEntry.RATING, rating);
         values.put(O2RunningLogContract.RunsEntry.NOTES, notes);
-        String strFilter = "_id";
         db.update(O2RunningLogContract.RunsEntry.TABLE_NAME, values, "_id = ?",
                 new String[]{Integer.toString(id.getId())});
 
