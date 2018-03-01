@@ -4,23 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.icu.util.Calendar;
-import android.text.format.DateFormat;
-import android.text.format.DateUtils;
-import android.util.Log;
-
-import com.google.gson.Gson;
-
 import net.danlew.android.joda.JodaTimeAndroid;
-
-import java.lang.Object.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
-import org.joda.time.*;
 
 /**
  * Created by Jonathan on 2/16/2018.
@@ -30,13 +16,8 @@ public class ControllerRunFormEntry {
     private DatabaseHelperO2RunningLog dbHelper;
     private String[] databaseColumns;
     private ArrayList<ModelRun> arrayListRuns;
-    private SQLiteDatabase readableDatabase;
-    private SQLiteDatabase writableDatabase;
-    private Context mContext;
     private ViewControllerRunForm mViewControllerRunFormEntry;
     private ViewControllerCalendar mViewControllerCalendar;
-    private static final String MILES = "mi";
-    private static final String KILOMETERS = "km";
 
     public ControllerRunFormEntry(Context context, ViewControllerRunForm inst){
         dbHelper = new DatabaseHelperO2RunningLog(context);
@@ -48,7 +29,6 @@ public class ControllerRunFormEntry {
                 O2RunningLogContract.RunsEntry.TIME, O2RunningLogContract.RunsEntry.RATING,
                 O2RunningLogContract.RunsEntry.NOTES};
         JodaTimeAndroid.init(context);
-        mContext = context;
     }
     public ControllerRunFormEntry(Context context, ViewControllerCalendar inst){
         dbHelper = new DatabaseHelperO2RunningLog(context);
@@ -60,7 +40,6 @@ public class ControllerRunFormEntry {
                 O2RunningLogContract.RunsEntry.TIME, O2RunningLogContract.RunsEntry.RATING,
                 O2RunningLogContract.RunsEntry.NOTES};
         JodaTimeAndroid.init(context);
-        mContext = context;
     }
 
     public ArrayList<ModelRun> getArrayListRuns(){

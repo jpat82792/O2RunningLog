@@ -3,7 +3,6 @@ package com.jpdev.o2runninglog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -122,7 +121,6 @@ public class ControllerAggregateStats {
 
     public String compareRates(double previousRate, double weightedRate){
         double rateDifference = weightedRate - previousRate;
-        Log.d("hustle", Double.toString(rateDifference));
         String rate;
         if(rateDifference > 1){
             rate = TREND_DIRECTION_UP;

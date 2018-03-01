@@ -2,27 +2,20 @@ package com.jpdev.o2runninglog;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.icu.text.SimpleDateFormat;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Formatter;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ViewControllerCalendar extends AppCompatActivity {
@@ -46,7 +39,6 @@ public class ViewControllerCalendar extends AppCompatActivity {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
         android.support.v4.app.FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         t.replace(R.id.calendar1, caldroidFragment);
-        Toolbar toolbar = findViewById(R.id.toolbar);
         ImageView imageViewBackArrow = findViewById(R.id.imageView);
 
         ControllerNavigation controllerNavigation = new ControllerNavigation(this, imageViewBackArrow, null, ControllerNavigation.NAV_CALENDAR);

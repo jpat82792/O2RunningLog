@@ -1,7 +1,6 @@
 package com.jpdev.o2runninglog;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -48,7 +47,6 @@ public class ControllerRatingWidget {
                 mLinearLayoutStarContainer.getChildAt(i).setBackground(mCurrentActivity.getResources().getDrawable(R.drawable.inactive_star));
             }
         }
-        Log.d("CONTAINER: ", Integer.toString(rating));
         for(int i=0; i < rating; i++){
             if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                 mLinearLayoutStarContainer.getChildAt(i).setBackgroundDrawable(mCurrentActivity.getResources().getDrawable(R.drawable.active_star));
@@ -61,11 +59,9 @@ public class ControllerRatingWidget {
     private void selectStar(int index, LinearLayout starContainer){
         setRatingValue(index);
         resetStarColors(index, starContainer);
-        Log.d("UGH", Integer.toString(index));
     }
     private void setRatingValue(int rating){
         editTextRatingValue.setText(Integer.toString(rating+1));
-        Log.d("SETRV:",editTextRatingValue.getText().toString());
     }
 
     private void resetStarColors(int index, LinearLayout starContainer){

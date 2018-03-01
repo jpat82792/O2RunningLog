@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,9 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -28,15 +24,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import mobi.upod.timedurationpicker.TimeDurationPicker;
-import mobi.upod.timedurationpicker.TimeDurationPickerDialogFragment;
 import mobi.upod.timedurationpicker.TimeDurationUtil;
 
 public class ViewControllerRunForm extends AppCompatActivity {
     private Button buttonSubmit;
     private ControllerRunFormEntry mControllerRunFormEntry;
-    //TODO: Remove editTexts arraylist unless you fix getEditTexts()
     private ArrayList<EditText> editTexts;
-    private TableLayout tableLayoutFormContainer;
     private EditText editTextName, editTextDistance,  editTextRating, editTextNotes;
     private ModelRun mModelRun;
     private TimeDurationPicker timePickerTime;
@@ -62,7 +55,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
         buttonSubmit = (Button) findViewById(R.id.run_form_submit);
         editTexts = new ArrayList<EditText>();
         initializeEditTexts(extras);
-        tableLayoutFormContainer = (TableLayout) findViewById(R.id.run_form_container);
         mControllerRunFormEntry = new ControllerRunFormEntry(this, this);
         setSupportActionBar((android.support.v7.widget.Toolbar)findViewById(R.id.my_toolbars));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -103,10 +95,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 }
             }
         });
-    }
-    public void setModelRun(String name, long distance, String distanceUnits, long time,
-                            int rating, long date, String notes){
-        mModelRun = new ModelRun(name, distance, distanceUnits, time, rating, date, notes);
     }
     private void setSpinner(){
         unitSpinner = findViewById(R.id.distance_unit_spinner);

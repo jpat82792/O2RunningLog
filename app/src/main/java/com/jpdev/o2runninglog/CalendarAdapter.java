@@ -4,10 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +19,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
-import java.util.Random;
 import java.util.TimeZone;
 
 import hirondelle.date4j.DateTime;
@@ -45,18 +40,13 @@ public class CalendarAdapter extends CaldroidGridAdapter {
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View cellView = convertView;
-
         if(convertView == null){
             cellView = inflater.inflate(R.layout.calendar_cell, null);
         }
         ArrayList<ModelRun> runs =(ArrayList<ModelRun>) extraData.get("MONTH_EVENTS");
         TextView textViewDay = cellView.findViewById(R.id.day_label);
-        //TextView textViewExtra = cellView.findViewById(R.id.day_something);
-        //Get datetime of cell
         DateTime dateTime = this.datetimeList.get(position);
-        Resources resources = context.getResources();
         textViewDay.setText(Integer.toString(dateTime.getDay()));
-        //textViewExtra.setText("hi");
         setRunEvent(dateTime, runs, cellView);
         return cellView;
     }
@@ -88,7 +78,6 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         imageView = cellView.findViewById(R.id.calendar_cell_background);
         if(!(currentDay.equals(dateDay) && currentMonth.equals(dateMonth))) {
             if (runMonth.equals(dateMonth) && runDay.equals(dateDay)) {
-                //cellView.setBackgroundResource(R.drawable.run_event_background);
                 imageView.setImageResource(R.drawable.run_event_background);
                 imageView.setScaleX((float)0.7);
                 imageView.setScaleY((float)0.7);
