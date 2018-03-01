@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">O2 Running Log</string>
+    <string-array name="distance_options">
+        <item>mi</item>
+        <item>km</item>
+    </string-array>
+</resources>

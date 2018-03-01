@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9CA2A5</color>
+    <color name="colorPrimaryDark">#9CA2A5</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="backgroundColor">#F1F1F1</color>
+    <color name="textColor">#000029</color>
+    <color name="ctaButtonColor">#0A0A63</color>
+    <color name="alternateButtonColor">#31318e</color>
+    <color name="hasRunColor">#8eb2ed</color>
+    <color name="white">#FFFFFF</color>
+</resources>

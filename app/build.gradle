@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.jpdev.o2runninglog"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.robolectric:robolectric:3.7.1"
+    compile 'mobi.upod:time-duration-picker:1.1.3'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'com.roomorama:caldroid:3.0.1'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'net.danlew:android.joda:2.9.9.2'
+}

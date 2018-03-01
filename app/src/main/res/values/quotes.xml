@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="motivational_quotes">
+        <item>
+            If people were possessed by reason, running marathons would not work.
+            But we are not creatures of reason. We are creatures of passion. - Noel Carroll
+        </item>
+        <item>
+            If it doesn\'t challenge you, it won\'t change you. - Fred DeVito
+        </item>
+        <item>
+            Sometimes the best runs come on days you didn\'t feel like running.
+        </item>
+        <item>
+            With self-discipline all things are possible. - Theodore Roosevelt
+        </item>
+        <item>
+           Today I will do what others won\'t so tomorrow I can do what others can\'t.
+        </item>
+        <item>
+            Running is like coffee. I\'m much nicer after I\'ve had one.
+        </item>
+        <item>
+            Make each day your masterpiece. - John Wooden
+        </item>
+    </string-array>
+</resources>

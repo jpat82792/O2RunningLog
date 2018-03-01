@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jpdev.o2runninglog.ViewControllerOnboardHome">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:text="O2 Running Log"
+        android:textAlignment="center"
+        android:textColor="@color/ctaButtonColor"
+        android:gravity="center"
+        android:background="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:layout_width="324dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="258dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="119dp"
+        android:text="Thanks for downloading O2 Running Log. This app hope's to bring fresh air into drudgery of tracking your runs. Press next to progress through the tutorial or skip if you want to start using the app."
+        android:textAlignment="center"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/onboard_button_skip_onboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+    <ImageView
+        android:id="@+id/onboard_imageview_featured_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/onboard_button_skip_onboard"
+        style="?android:borderlessButtonStyle"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:background="@color/alternateButtonColor"
+        android:textColor="@color/white"
+        android:letterSpacing="0.25"
+        android:text="Skip"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/onboard_button_next"
+        style="?android:borderlessButtonStyle"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:background="@color/ctaButtonColor"
+        android:textColor="@color/white"
+        android:letterSpacing="0.25"
+        android:text="Next"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/onboard_button_skip_onboard" />
+
+</android.support.constraint.ConstraintLayout>
