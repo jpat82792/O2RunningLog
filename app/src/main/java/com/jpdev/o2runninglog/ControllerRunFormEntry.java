@@ -102,11 +102,11 @@ public class ControllerRunFormEntry {
                     long dateFrom = cursor.getLong(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DATE));
                     run = new ModelRun(name, distance, distanceUnits, time, rating, dateFrom, notes, _id);
                 }
+                cursor.close();
             }
             else{
 
             }
-
         }
         return run;
     }
@@ -138,10 +138,6 @@ public class ControllerRunFormEntry {
         long runDate = cursor.getLong(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DATE));
         arrayListRuns.add(new ModelRun(runName, runDistance, runDistanceUnits, runTime,runRating,
                 runDate, runNotes, runId ));
-    }
-
-    public void getRuns(String month, String year){
-
     }
 
     public DatabaseHelperO2RunningLog getDbHelper(){
