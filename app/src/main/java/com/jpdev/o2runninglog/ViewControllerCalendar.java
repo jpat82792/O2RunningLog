@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -40,7 +39,6 @@ public class ViewControllerCalendar extends AppCompatActivity {
         android.support.v4.app.FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         t.replace(R.id.calendar1, caldroidFragment);
         ImageView imageViewBackArrow = findViewById(R.id.imageView);
-
         ControllerNavigation controllerNavigation = new ControllerNavigation(this, imageViewBackArrow, null, ControllerNavigation.NAV_CALENDAR);
         t.commit();
         final java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-mm-dd");
@@ -76,5 +74,9 @@ public class ViewControllerCalendar extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void onDestroy(){
+        controllerRunFormEntry.getDbHelper().close();
+        super.onDestroy();
     }
 }

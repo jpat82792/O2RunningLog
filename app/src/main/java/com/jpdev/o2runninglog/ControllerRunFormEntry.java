@@ -145,4 +145,8 @@ public class ControllerRunFormEntry {
 
     }
 
+    public DatabaseHelperO2RunningLog getDbHelper(){
+        return dbHelper;
+    }
+
 }

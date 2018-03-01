@@ -214,4 +214,9 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void onDestroy(){
+        mControllerRunFormEntry.getDbHelper().close();
+        super.onDestroy();
+    }
 }
