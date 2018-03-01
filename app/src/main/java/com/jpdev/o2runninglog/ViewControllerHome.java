@@ -38,7 +38,6 @@ public class ViewControllerHome extends AppCompatActivity {
         mSharedPreferences = this.getSharedPreferences("com.jpdev.o2runninglog", Context.MODE_PRIVATE);
         boolean booleanDistanceUnit = mSharedPreferences.getBoolean("com.jpdev.o2runninglog.distance_units", false);
         setDistanceUnit(booleanDistanceUnit);
-        TextView textViewWeekMonth = findViewById(R.id.textView2);
         TextView textViewTotalMileage = findViewById(R.id.total_mileage);
         textViewWeekMonthAmountLabel = findViewById(R.id.month_week_mileage);
         textViewAllTimeLabel = findViewById(R.id.textView8);
@@ -122,7 +121,6 @@ public class ViewControllerHome extends AppCompatActivity {
     }
 
     private void setMileageTextView(double value, TextView textView){
-        //textView.setText(Double.toString(Math.round(value*100.0)/100));
         BigDecimal temp = new BigDecimal(value);
         BigDecimal temp1 = temp.setScale(2, RoundingMode.HALF_UP);
         textView.setText(temp1.toString());
