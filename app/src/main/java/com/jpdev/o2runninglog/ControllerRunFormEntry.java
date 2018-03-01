@@ -105,7 +105,6 @@ public class ControllerRunFormEntry {
                 cursor.close();
             }
             else{
-
             }
         }
         return run;
