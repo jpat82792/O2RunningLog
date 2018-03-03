@@ -11,6 +11,7 @@
         android:id="@+id/rating_widget_container"
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content">
 
         <ImageView

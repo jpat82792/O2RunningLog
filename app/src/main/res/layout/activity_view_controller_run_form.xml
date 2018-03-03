@@ -115,7 +115,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:gravity="left">
+                android:gravity="left"
+                android:paddingTop="4dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -135,11 +136,14 @@
                     android:inputType="numberDecimal"
                     android:nextFocusDown="@id/run_time_edittext" />
             </TableRow>
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:gravity="left">
+                android:gravity="left"
+                android:paddingTop="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -147,7 +151,8 @@
                     android:gravity="center_vertical"
                     android:text="Unit"
                     android:textColor="@color/textColor"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
+
                 <Spinner
                     android:id="@+id/distance_unit_spinner"
                     android:layout_width="wrap_content"
@@ -155,27 +160,30 @@
                     android:textColor="@color/textColor"
                     android:textSize="20sp"></Spinner>
             </TableRow>
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:gravity="left">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingTop="8dp"
-                android:text="Time"
-                android:textColor="@color/textColor"
-                android:textSize="20sp" />
+                android:gravity="left"
+                android:paddingTop="4dp">
 
-            <Button
-                android:id="@+id/show_time_picker"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:text="Enter Time"
-                android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingTop="8dp"
+                    android:text="Time"
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/show_time_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enter Time" />
             </TableRow>
             <mobi.upod.timedurationpicker.TimeDurationPicker
                 android:id="@+id/run_time_edittext"
@@ -191,7 +199,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:gravity="left">
+                android:gravity="left"
+                android:paddingTop="16dp">
+
+                <EditText
+                    android:id="@+id/run_rating_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:hint="jkl"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:nextFocusDown="@id/run_notes_edittext"
+                    android:paddingTop="8dp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -202,17 +225,11 @@
                     android:textColor="@color/textColor"
                     android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/run_rating_edittext"
+                <include
+                    layout="@layout/rating_widget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:hint="jkl"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:visibility="gone"
-                    android:nextFocusDown="@id/run_notes_edittext" />
-                <include layout="@layout/rating_widget">
+                    android:layout_gravity="center">
 
                 </include>
 
@@ -222,8 +239,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:gravity="center_vertical"
-                android:paddingTop="20dp"
+                android:paddingTop="8dp"
                 android:text="Notes"
                 android:textColor="@color/textColor"
                 android:textSize="20sp" />
