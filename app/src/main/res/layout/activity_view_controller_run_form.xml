@@ -87,7 +87,7 @@
                 android:gravity="left">
 
                 <TextView
-                    android:layout_width="81dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
                     android:layout_weight="1"
@@ -169,14 +169,6 @@
                 android:textColor="@color/textColor"
                 android:textSize="20sp" />
 
-           <!-- <mobi.upod.timedurationpicker.TimeDurationPicker
-                android:id="@+id/run_time_edittext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:timePickerMode="spinner"
-                app:textAppearanceDisplay="@style/TextAppearance.TimeDurationPicker.Display" />                 android:onClick="startTimer"-->
             <Button
                 android:id="@+id/show_time_picker"
                 android:layout_height="wrap_content"
