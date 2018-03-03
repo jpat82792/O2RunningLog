@@ -44,12 +44,13 @@
                 android:textSize="22sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/calendar_icon_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="52dp"
-                android:layout_marginLeft="52dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
                 android:scaleType="fitCenter"
                 android:scaleX="0.7"
                 android:scaleY="0.7"

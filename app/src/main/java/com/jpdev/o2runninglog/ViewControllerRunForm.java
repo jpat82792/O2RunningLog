@@ -96,6 +96,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
             }
         });
     }
+
     private void setSpinner(){
         unitSpinner = findViewById(R.id.distance_unit_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.distance_options, android.R.layout.simple_spinner_dropdown_item);
@@ -142,10 +143,10 @@ public class ViewControllerRunForm extends AppCompatActivity {
                     Date today = new Date();
                     long currentTime;
                     currentTime = today.getTime();
-
                     if(!editTextDistance.getText().toString().equals("")) {
                         mControllerRunFormEntry.createRun(editTextName.getText().toString(),
-                                Integer.parseInt(editTextDistance.getText().toString()), "mi",
+                                Integer.parseInt(editTextDistance.getText().toString()),
+                                "mi",
                                 (long) timePickerTime.getDuration(), currentTime,
                                 Integer.parseInt(editTextRating.getText().toString()),
                                 editTextNotes.getText().toString());
