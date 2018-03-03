@@ -61,11 +61,9 @@ public class ViewControllerHome extends AppCompatActivity {
         ControllerNavigation controllerNavigation = new ControllerNavigation(this, imageViewCalendar, buttonEnterRun, ControllerNavigation.NAV_HOME);
 
         if(mSharedPreferences.getString("com.jpdev.o2runninglog.time_period", "month").equals("month")){
-            Log.d("time", "month");
             getMonthTotal();
         }
         else{
-            Log.d("time", "week");
             getWeekTotal();
         }
 
