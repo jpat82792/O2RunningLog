@@ -50,9 +50,10 @@
 
     <RelativeLayout
         android:id="@+id/calendar1"
-        android:layout_width="368dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbars" />
 </android.support.constraint.ConstraintLayout>
