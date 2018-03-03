@@ -128,9 +128,9 @@
 
                 <EditText
                     android:id="@+id/run_distance_edittext"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:layout_weight="9.4"
                     android:hint="Distance"
                     android:inputType="numberDecimal"
                     android:nextFocusDown="@id/run_time_edittext" />
