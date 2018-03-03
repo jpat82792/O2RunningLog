@@ -38,6 +38,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
     private ControllerRatingWidget mControllerRatingWidget;
     private Spinner unitSpinner;
     private Button buttonShowPicker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +97,8 @@ public class ViewControllerRunForm extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void setSpinner(){
         unitSpinner = findViewById(R.id.distance_unit_spinner);

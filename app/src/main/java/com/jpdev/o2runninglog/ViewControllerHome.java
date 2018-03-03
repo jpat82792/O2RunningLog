@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ public class ViewControllerHome extends AppCompatActivity {
     private Context mContext;
     private String distanceUnit;
     private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,9 @@ public class ViewControllerHome extends AppCompatActivity {
         buttonWeekTotal = findViewById(R.id.week_total_button);
         buttonMonthTotal = findViewById(R.id.month_total_button);
         textViewWeekMonthLabel = findViewById(R.id.textView2);
+
         mSharedPreferences = this.getSharedPreferences("com.jpdev.o2runninglog", Context.MODE_PRIVATE);
+        editor = mSharedPreferences.edit();
         boolean booleanDistanceUnit = mSharedPreferences.getBoolean("com.jpdev.o2runninglog.distance_units", false);
         setDistanceUnit(booleanDistanceUnit);
         TextView textViewTotalMileage = findViewById(R.id.total_mileage);
@@ -55,16 +59,28 @@ public class ViewControllerHome extends AppCompatActivity {
         setTrendArrowRotation();
         setMileageMeasurementLabels(distanceUnit);
         ControllerNavigation controllerNavigation = new ControllerNavigation(this, imageViewCalendar, buttonEnterRun, ControllerNavigation.NAV_HOME);
+
+        if(mSharedPreferences.getString("com.jpdev.o2runninglog.time_period", "month").equals("month")){
+            Log.d("time", "month");
+            getMonthTotal();
+        }
+        else{
+            Log.d("time", "week");
+            getWeekTotal();
+        }
+
         buttonWeekTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getWeekTotal();
+                setTimePeriod("week");
             }
         });
         buttonMonthTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getMonthTotal();
+                setTimePeriod("month");
             }
         });
     }
@@ -75,6 +91,17 @@ public class ViewControllerHome extends AppCompatActivity {
         }
         else{
             distanceUnit="mi";
+        }
+    }
+
+    private void setTimePeriod(String arg){
+        if(arg.equals("month")){
+            editor.putString("com.jpdev.o2runninglog.time_period","month");
+            editor.apply();
+        }
+        else{
+            editor.putString("com.jpdev.o2runninglog.time_period","week");
+            editor.apply();
         }
     }
 
