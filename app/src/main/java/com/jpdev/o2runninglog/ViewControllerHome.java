@@ -37,7 +37,6 @@ public class ViewControllerHome extends AppCompatActivity {
         buttonWeekTotal = findViewById(R.id.week_total_button);
         buttonMonthTotal = findViewById(R.id.month_total_button);
         textViewWeekMonthLabel = findViewById(R.id.textView2);
-
         mSharedPreferences = this.getSharedPreferences("com.jpdev.o2runninglog", Context.MODE_PRIVATE);
         editor = mSharedPreferences.edit();
         boolean booleanDistanceUnit = mSharedPreferences.getBoolean("com.jpdev.o2runninglog.distance_units", false);

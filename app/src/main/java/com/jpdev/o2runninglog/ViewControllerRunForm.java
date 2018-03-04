@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,10 +22,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import mobi.upod.timedurationpicker.TimeDurationPicker;
 import mobi.upod.timedurationpicker.TimeDurationUtil;
+
+//TODO: add way to add run from previous date
 
 public class ViewControllerRunForm extends AppCompatActivity {
     private Button buttonSubmit;
@@ -33,24 +37,27 @@ public class ViewControllerRunForm extends AppCompatActivity {
     private EditText editTextName, editTextDistance,  editTextRating, editTextNotes;
     private ModelRun mModelRun;
     private TimeDurationPicker timePickerTime;
-    private boolean notCalendar, showPicker;
+    private boolean notCalendar, showPicker, pastNoRecord;
     private int mId;
     private ControllerRatingWidget mControllerRatingWidget;
     private Spinner unitSpinner;
     private Button buttonShowPicker;
+    private String stringDay, stringMonth, stringYear;
+    private boolean existing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_controller_run_form);
         mModelRun = null;
+        pastNoRecord = false;
         View calendarButton = findViewById(R.id.calendar_icon_home);
         View goBackButton = findViewById(R.id.imageView);
         LinearLayout starContainer = findViewById(R.id.rating_widget_container);
         EditText starWidgetValue = findViewById(R.id.rating_widget_value);
         mControllerRatingWidget = new ControllerRatingWidget(starContainer, this, starWidgetValue);
         ControllerNavigation controllerNavigation = new ControllerNavigation(this,
-                calendarButton,goBackButton, ControllerNavigation.NAV_RUN_FORM );
+                calendarButton,goBackButton, ControllerNavigation.NAV_RUN_FORM);
         notCalendar = true;
         Bundle extras = getIntent().getExtras();
         buttonSubmit = (Button) findViewById(R.id.run_form_submit);
@@ -59,18 +66,24 @@ public class ViewControllerRunForm extends AppCompatActivity {
         mControllerRunFormEntry = new ControllerRunFormEntry(this, this);
         setSupportActionBar((android.support.v7.widget.Toolbar)findViewById(R.id.my_toolbars));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        boolean existing = false;
+        existing = false;
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
 
         if(mModelRun == null) {
-            mModelRun = mControllerRunFormEntry.checkForRun();
+            //TODO:checkForRun needs to check bundle date if one exists
+            if(extras.get("month")!= null){
+                existing = true;
+            }
+            else{
+                mModelRun = mControllerRunFormEntry.checkForRun();
+            }
         }
-        if(mModelRun != null && notCalendar){
+        if(mModelRun != null){
             setEditTextContent(editTextName, editTextDistance, unitSpinner, timePickerTime, editTextRating, editTextNotes, mModelRun);
             existing = true;
         }
         setSpinner();
-        buttonSubmit.setOnClickListener(setButtonSubmitListener(existing));
+        buttonSubmit.setOnClickListener(setButtonSubmitListener(existing, pastNoRecord));
 
         showPicker = true;
         buttonShowPicker.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +111,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
         });
     }
 
-
-
     private void setSpinner(){
         unitSpinner = findViewById(R.id.distance_unit_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.distance_options, android.R.layout.simple_spinner_dropdown_item);
@@ -118,28 +129,62 @@ public class ViewControllerRunForm extends AppCompatActivity {
     public int getId(){
         return mId;
     }
-
-    private View.OnClickListener setButtonSubmitListener(boolean exists){
-        if(exists){
-            return new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Date today = new Date();
-                    long currentTime;
-                    if(!editTextDistance.getText().toString().equals("")) {
-                        mControllerRunFormEntry.updateRun(editTextName.getText().toString(),
-                                Integer.parseInt(editTextDistance.getText().toString()), unitSpinner.getSelectedItem().toString(),
-                                (long) timePickerTime.getDuration(), Integer.parseInt(editTextRating.getText().toString()),
-                                editTextNotes.getText().toString(), mModelRun);
-                        Toast.makeText(ViewControllerRunForm.this, "Run updated", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            };
+    //To add runs from past.
+    private void setPreviousRun(int day, int month, int year){
+        Log.d("SubmitFX: ", "setPreviousRun");
+        Calendar calendarDate = Calendar.getInstance();
+        calendarDate.set(year, month, day, 0,0);
+        long dateRun = calendarDate.getTimeInMillis();
+        if(!editTextDistance.getText().toString().equals("")) {
+            mControllerRunFormEntry.createRun(editTextName.getText().toString(),
+                    Integer.parseInt(editTextDistance.getText().toString()),
+                    "mi",
+                    (long) timePickerTime.getDuration(), dateRun,
+                    Integer.parseInt(editTextRating.getText().toString()),
+                    editTextNotes.getText().toString());
+            Toast.makeText(ViewControllerRunForm.this, "Run saved no prev", Toast.LENGTH_SHORT).show();
         }
         else{
+            Toast.makeText(ViewControllerRunForm.this, "Please add a distance no prev", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private View.OnClickListener setButtonSubmitListener(boolean exists, boolean pastRecord){
+        if(exists){
+            if(pastRecord){
+                Log.d("current: ", "pastRecord = true && exists == true");
+                return new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int year = Integer.parseInt(stringYear);
+                        int month = Integer.parseInt(stringMonth)-1;
+                        int day = Integer.parseInt(stringDay);
+                        setPreviousRun(day, month, year);
+                    }
+                };
+            }
+            else {
+                Log.d("current: ", "pastRecord = false && exists == true");
+                return new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Date today = new Date();
+                        long currentTime;
+                        if (!editTextDistance.getText().toString().equals("")) {
+                            mControllerRunFormEntry.updateRun(editTextName.getText().toString(),
+                                    Integer.parseInt(editTextDistance.getText().toString()), unitSpinner.getSelectedItem().toString(),
+                                    (long) timePickerTime.getDuration(), Integer.parseInt(editTextRating.getText().toString()),
+                                    editTextNotes.getText().toString(), mModelRun);
+                            Toast.makeText(ViewControllerRunForm.this, "Run updated", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                };
+            }
+        }
+        else{
+            Log.d("current: ", "pastRecord = false && exists == false");
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -177,13 +222,21 @@ public class ViewControllerRunForm extends AppCompatActivity {
         setSpinner();
         buttonShowPicker = findViewById(R.id.show_time_picker);
         if(bundle != null){
-            String runJson;
-            runJson = bundle.getString("run");
-            ModelRun run = new Gson().fromJson(runJson, ModelRun.class);
-            setEditTextContent(editTextName, editTextDistance,unitSpinner, timePickerTime, editTextRating,
-                    editTextNotes, run);
-            setId(run.getId());
-            setModelRun(run);
+            if(bundle.get("month") == null) {
+                String runJson;
+                runJson = bundle.getString("run");
+                ModelRun run = new Gson().fromJson(runJson, ModelRun.class);
+                setEditTextContent(editTextName, editTextDistance, unitSpinner, timePickerTime, editTextRating,
+                        editTextNotes, run);
+                setId(run.getId());
+                setModelRun(run);
+            }
+            else{
+                stringDay = bundle.get("day").toString();
+                stringMonth = bundle.get("month").toString();
+                stringYear = bundle.get("year").toString();
+                pastNoRecord = true;
+            }
             notCalendar = false;
         }
     }
