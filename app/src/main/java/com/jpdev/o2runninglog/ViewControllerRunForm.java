@@ -130,8 +130,11 @@ public class ViewControllerRunForm extends AppCompatActivity {
         return mId;
     }
     //To add runs from past.
-    private void setPreviousRun(int day, int month, int year){
+    private void setPreviousRun(){
         Log.d("SubmitFX: ", "setPreviousRun");
+        int year = Integer.parseInt(stringYear);
+        int month = Integer.parseInt(stringMonth)-1;
+        int day = Integer.parseInt(stringDay);
         Calendar calendarDate = Calendar.getInstance();
         calendarDate.set(year, month, day, 0,0);
         long dateRun = calendarDate.getTimeInMillis();
@@ -148,6 +151,35 @@ public class ViewControllerRunForm extends AppCompatActivity {
             Toast.makeText(ViewControllerRunForm.this, "Please add a distance no prev", Toast.LENGTH_SHORT).show();
         }
     }
+    private void updatePreviousRun(){
+        if (!editTextDistance.getText().toString().equals("")) {
+            mControllerRunFormEntry.updateRun(editTextName.getText().toString(),
+                    Integer.parseInt(editTextDistance.getText().toString()), unitSpinner.getSelectedItem().toString(),
+                    (long) timePickerTime.getDuration(), Integer.parseInt(editTextRating.getText().toString()),
+                    editTextNotes.getText().toString(), mModelRun);
+            Toast.makeText(ViewControllerRunForm.this, "Run updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setNewRun(){
+        Date today = new Date();
+        long currentTime;
+        currentTime = today.getTime();
+        if(!editTextDistance.getText().toString().equals("")) {
+            mControllerRunFormEntry.createRun(editTextName.getText().toString(),
+                    Integer.parseInt(editTextDistance.getText().toString()),
+                    "mi",
+                    (long) timePickerTime.getDuration(), currentTime,
+                    Integer.parseInt(editTextRating.getText().toString()),
+                    editTextNotes.getText().toString());
+            Toast.makeText(ViewControllerRunForm.this, "Run saved", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private View.OnClickListener setButtonSubmitListener(boolean exists, boolean pastRecord){
         if(exists){
@@ -156,10 +188,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 return new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int year = Integer.parseInt(stringYear);
-                        int month = Integer.parseInt(stringMonth)-1;
-                        int day = Integer.parseInt(stringDay);
-                        setPreviousRun(day, month, year);
+                        setPreviousRun();
                     }
                 };
             }
@@ -168,17 +197,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 return new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Date today = new Date();
-                        long currentTime;
-                        if (!editTextDistance.getText().toString().equals("")) {
-                            mControllerRunFormEntry.updateRun(editTextName.getText().toString(),
-                                    Integer.parseInt(editTextDistance.getText().toString()), unitSpinner.getSelectedItem().toString(),
-                                    (long) timePickerTime.getDuration(), Integer.parseInt(editTextRating.getText().toString()),
-                                    editTextNotes.getText().toString(), mModelRun);
-                            Toast.makeText(ViewControllerRunForm.this, "Run updated", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
-                        }
+                        updatePreviousRun();
                     }
                 };
             }
@@ -188,24 +207,9 @@ public class ViewControllerRunForm extends AppCompatActivity {
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Date today = new Date();
-                    long currentTime;
-                    currentTime = today.getTime();
-                    if(!editTextDistance.getText().toString().equals("")) {
-                        mControllerRunFormEntry.createRun(editTextName.getText().toString(),
-                                Integer.parseInt(editTextDistance.getText().toString()),
-                                "mi",
-                                (long) timePickerTime.getDuration(), currentTime,
-                                Integer.parseInt(editTextRating.getText().toString()),
-                                editTextNotes.getText().toString());
-                        Toast.makeText(ViewControllerRunForm.this, "Run saved", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
-                    }
+                    setNewRun();
                 }
             };
-
         }
     }
 
