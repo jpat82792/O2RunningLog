@@ -217,6 +217,12 @@ public class ViewControllerRunForm extends AppCompatActivity {
         mId = id;
     }
 
+    private void setTimeStrings(String day, String month, String year){
+        stringDay = day;
+        stringMonth = month;
+        stringYear = year;
+    }
+
     private void initializeEditTexts(Bundle bundle){
         editTextName = (EditText) findViewById(R.id.run_name_edittext);
         editTextDistance = (EditText) findViewById(R.id.run_distance_edittext);
@@ -236,9 +242,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 setModelRun(run);
             }
             else{
-                stringDay = bundle.get("day").toString();
-                stringMonth = bundle.get("month").toString();
-                stringYear = bundle.get("year").toString();
+                setTimeStrings(bundle.get("day").toString(), bundle.get("month").toString(),bundle.get("year").toString());
                 pastNoRecord = true;
             }
             notCalendar = false;
