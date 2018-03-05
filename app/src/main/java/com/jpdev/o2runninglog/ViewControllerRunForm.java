@@ -226,7 +226,9 @@ public class ViewControllerRunForm extends AppCompatActivity {
         editTextName = (EditText) findViewById(R.id.run_name_edittext);
         editTextDistance = (EditText) findViewById(R.id.run_distance_edittext);
         timePickerTime = (TimeDurationPicker) findViewById(R.id.run_time_edittext);
+        timePickerTime.setDuration(0);
         editTextRating = (EditText) findViewById(R.id.rating_widget_value);
+        editTextRating.setText("0");
         editTextNotes = (EditText) findViewById(R.id.run_notes_edittext);
         setSpinner();
         buttonShowPicker = findViewById(R.id.show_time_picker);
