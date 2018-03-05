@@ -75,6 +75,16 @@ public class ViewControllerCalendar extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK) {
+            Intent refresh = new Intent(this, ViewControllerCalendar.class);
+            startActivity(refresh);
+            this.finish();
+        }
+
+    }
     public void onDestroy(){
         controllerRunFormEntry.getDbHelper().close();
         super.onDestroy();

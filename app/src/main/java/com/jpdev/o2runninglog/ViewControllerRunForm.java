@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -131,7 +130,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
     }
     //To add runs from past.
     private void setPreviousRun(){
-        Log.d("SubmitFX: ", "setPreviousRun");
         int year = Integer.parseInt(stringYear);
         int month = Integer.parseInt(stringMonth)-1;
         int day = Integer.parseInt(stringDay);
@@ -184,7 +182,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
     private View.OnClickListener setButtonSubmitListener(boolean exists, boolean pastRecord){
         if(exists){
             if(pastRecord){
-                Log.d("current: ", "pastRecord = true && exists == true");
                 return new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -193,7 +190,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 };
             }
             else {
-                Log.d("current: ", "pastRecord = false && exists == true");
                 return new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -203,7 +199,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
             }
         }
         else{
-            Log.d("current: ", "pastRecord = false && exists == false");
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

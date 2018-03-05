@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,15 +129,11 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         cellView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("fxType: ", "setOpenRunFormNoRecord");
                 Intent runFormIntent = new Intent(mContext, ViewControllerRunForm.class);
-                Log.d("day", day);
-                Log.d("month", month);
-                Log.d("year", year);
                 runFormIntent.putExtra("day", day);
                 runFormIntent.putExtra("month", month);
                 runFormIntent.putExtra("year", year);
-                mContext.startActivity(runFormIntent);
+                ((ViewControllerCalendar)mContext).startActivityForResult(runFormIntent, 1);
             }
         });
     }
@@ -146,12 +142,11 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         cellView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("fxType: ", "setOpenRunForm");
                 Intent runFormIntent = new Intent(mContext, ViewControllerRunForm.class);
                 runFormIntent.putExtra("run", new Gson().toJson(finalRun));
-                Log.d("modelRun: ", new Gson().toJson(finalRun));
                 runFormIntent.setAction(new Gson().toJson(finalRun));
-                mContext.startActivity(runFormIntent);
+                ((ViewControllerCalendar)mContext).startActivityForResult(runFormIntent, 1);
+
             }
         });
     }
