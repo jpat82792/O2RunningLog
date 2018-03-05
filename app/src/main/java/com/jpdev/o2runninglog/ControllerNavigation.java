@@ -32,7 +32,6 @@ public class ControllerNavigation {
             setCalendarButton(activity, calendarButton);
         }
         parentActivity = activity;
-
     }
 
     private void setRunFormHome(final Activity activity, View runButton){
@@ -49,7 +48,7 @@ public class ControllerNavigation {
             @Override
             public void onClick(View view) {
                 Toast.makeText(activity, "Loading calendar", Toast.LENGTH_SHORT).show();
-                activity.startActivityForResult(new Intent(activity, ViewControllerCalendar.class), 2);
+                (activity).startActivity(new Intent(activity, ViewControllerCalendar.class));
             }
         });
     }

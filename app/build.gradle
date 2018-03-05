@@ -5,10 +5,10 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.jpdev.o2runninglog"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 26
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 6
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

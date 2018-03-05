@@ -83,7 +83,6 @@ public class ViewControllerCalendar extends AppCompatActivity {
             startActivity(refresh);
             this.finish();
         }
-
     }
     public void onDestroy(){
         controllerRunFormEntry.getDbHelper().close();

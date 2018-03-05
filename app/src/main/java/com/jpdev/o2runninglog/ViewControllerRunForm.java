@@ -70,8 +70,12 @@ public class ViewControllerRunForm extends AppCompatActivity {
 
         if(mModelRun == null) {
             //TODO:checkForRun needs to check bundle date if one exists
-            if(extras.get("month")!= null){
-                existing = true;
+            if(extras != null) {
+                if (extras.get("month") != null) {
+                    existing = true;
+                } else {
+                    mModelRun = mControllerRunFormEntry.checkForRun();
+                }
             }
             else{
                 mModelRun = mControllerRunFormEntry.checkForRun();

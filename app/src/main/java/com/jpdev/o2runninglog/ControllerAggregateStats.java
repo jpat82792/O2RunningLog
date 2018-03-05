@@ -241,8 +241,6 @@ public class ControllerAggregateStats {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         LocalDate weekStart =today.dayOfWeek().withMinimumValue();
         LocalDate weekEnd = today.dayOfWeek().withMaximumValue();
-        TimeZone tz = TimeZone.getDefault();
-        //DateTimeZone datetz = DateTimeZone.forID(tz.toString());
         LocalTime localTime = new LocalTime();
         double weekMileTotal = 0;
         double weekKilometerTotal = 0;

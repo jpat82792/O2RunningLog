@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,9 +61,9 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         String dateMonth =(String)  DateFormat.format("MM", date);
         String dateDay = (String) DateFormat.format("dd", date);
         String dateYear = (String) DateFormat.format("yyyy", date);
-
         eventSet = false;
         if(runs.size() != 0) {
+            Log.d("STATED:","runs");
             for (int i = 0; i < runs.size(); i++) {
                 if(!eventSet){
                     ModelRun run = runs.get(i);
@@ -74,6 +75,7 @@ public class CalendarAdapter extends CaldroidGridAdapter {
             }
         }
         else{
+            Log.d("STATED:","none");
             dateMonth =(String)  DateFormat.format("MM", date);
             setCalendarDay(null, null, dateMonth, dateYear,dateDay, view, null);
         }
@@ -90,37 +92,60 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         ImageView imageView;
         imageView = cellView.findViewById(R.id.calendar_cell_background);
         if (!(currentDay.equals(dateDay) && currentMonth.equals(dateMonth))) {
-            if (runMonth.equals(dateMonth) && runDay.equals(dateDay)) {
-                imageView.setImageResource(R.drawable.run_event_background);
-                imageView.setScaleX((float) 0.7);
-                imageView.setScaleY((float) 0.7);
-                imageView.setVisibility(View.VISIBLE);
-                final long currentClock = System.currentTimeMillis();
-                setOpenRunForm(run, cellView, currentClock);
-                eventSet = true;
+            if(runMonth != null && runDay != null) {
+                if (runMonth.equals(dateMonth) && runDay.equals(dateDay)) {
+                    imageView.setImageResource(R.drawable.run_event_background);
+                    imageView.setScaleX((float) 0.7);
+                    imageView.setScaleY((float) 0.7);
+                    imageView.setVisibility(View.VISIBLE);
+                    final long currentClock = System.currentTimeMillis();
+                    setOpenRunForm(run, cellView);
+                    eventSet = true;
+                }
+                else {
+                    Log.d("EVERGO","tiny dancer");
+                    setOpenRunFormNoRecord(dateDay, dateMonth, dateYear, cellView);
+                }
             }
-            else{
+            else {
+                Log.d("EVERGO","tiny dancer");
                 setOpenRunFormNoRecord(dateDay, dateMonth, dateYear, cellView);
             }
         }
         else {
-            if (runMonth.equals(dateMonth) && runDay.equals(dateDay)) {
-                imageView.setImageResource(R.drawable.active_circle);
-                imageView.setScaleX((float) 0.7);
-                imageView.setScaleY((float) 0.7);
-                imageView.setVisibility(View.VISIBLE);
-                ((TextView) cellView.findViewById(R.id.day_label)).setTextColor(Color.parseColor("#FFFFFF"));
-                final long currentClock = System.currentTimeMillis();
-                setOpenRunForm(run, cellView, currentClock);
-                eventSet = true;
-            } else {
-                imageView.setImageResource(R.drawable.active_circle);
-                imageView.setScaleX((float) 0.7);
-                imageView.setScaleY((float) 0.7);
-                imageView.setVisibility(View.VISIBLE);
-                ((TextView) cellView.findViewById(R.id.day_label)).setTextColor(Color.parseColor("#FFFFFF"));
-                final long currentClock = System.currentTimeMillis();
-                setOpenRunFormNoRecord(dateDay, dateMonth, dateYear, cellView);
+            if(runMonth != null && runDay != null) {
+                if (runMonth.equals(dateMonth) && runDay.equals(dateDay)) {
+                    Log.d("EVERGO", "else if");
+                    imageView.setImageResource(R.drawable.active_circle);
+                    imageView.setScaleX((float) 0.7);
+                    imageView.setScaleY((float) 0.7);
+                    imageView.setVisibility(View.VISIBLE);
+                    ((TextView) cellView.findViewById(R.id.day_label)).setTextColor(Color.parseColor("#FFFFFF"));
+                    setOpenRunForm(run, cellView);
+                    eventSet = true;
+                }
+                else{
+                    Log.d("EVERGO", "elsid");
+                    imageView.setImageResource(R.drawable.active_circle);
+                    imageView.setScaleX((float) 0.7);
+                    imageView.setScaleY((float) 0.7);
+                    imageView.setVisibility(View.VISIBLE);
+                    ((TextView) cellView.findViewById(R.id.day_label)).setTextColor(Color.parseColor("#FFFFFF"));
+                    setOpenRunFormNoRecord(dateDay, dateMonth, dateYear, cellView);
+                    eventSet = true;
+                }
+            }
+            else {
+                if(currentDay.equals(dateDay) && currentMonth.equals(dateMonth)) {
+                    Log.d("EVERGO", "elsie");
+                    imageView.setImageResource(R.drawable.active_circle);
+                    imageView.setScaleX((float) 0.7);
+                    imageView.setScaleY((float) 0.7);
+                    imageView.setVisibility(View.VISIBLE);
+                    ((TextView) cellView.findViewById(R.id.day_label)).setTextColor(Color.parseColor("#FFFFFF"));
+                    setOpenRunFormNoRecord(dateDay, dateMonth, dateYear, cellView);
+                    eventSet = true;
+                }
             }
         }
     }
@@ -129,6 +154,7 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         cellView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("MID::","setOpenRunFormNoRecord");
                 Intent runFormIntent = new Intent(mContext, ViewControllerRunForm.class);
                 runFormIntent.putExtra("day", day);
                 runFormIntent.putExtra("month", month);
@@ -137,11 +163,12 @@ public class CalendarAdapter extends CaldroidGridAdapter {
             }
         });
     }
-    private void setOpenRunForm(ModelRun run, View cellView, final long currentClock){
+    private void setOpenRunForm(ModelRun run, View cellView){
         final ModelRun finalRun = run;
         cellView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("MID::","setOpenRunForm");
                 Intent runFormIntent = new Intent(mContext, ViewControllerRunForm.class);
                 runFormIntent.putExtra("run", new Gson().toJson(finalRun));
                 runFormIntent.setAction(new Gson().toJson(finalRun));
