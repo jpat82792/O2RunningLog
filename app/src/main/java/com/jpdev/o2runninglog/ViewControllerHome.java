@@ -3,6 +3,7 @@ package com.jpdev.o2runninglog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,7 +48,16 @@ public class ViewControllerHome extends AppCompatActivity {
         mControllerAggregateStats = new ControllerAggregateStats(this);
         imageViewTrendArrow = findViewById(R.id.imageViewTrendArrow);
         ImageView imageViewCalendar = findViewById(R.id.calendar_icon_home);
-        setMileageTextView(mControllerAggregateStats.getWeeklyMileage(distanceUnit),textViewWeekMonthAmountLabel);
+        String currentPeriodSelector = mSharedPreferences.getString("com.jpdev.o2runninglog.period_selector", "week");
+        if(currentPeriodSelector.equals("week")){
+            setMileageTextView(mControllerAggregateStats.getWeeklyMileage(distanceUnit),textViewWeekMonthAmountLabel);
+            buttonWeekTotal.setTypeface(null, Typeface.BOLD);
+        }
+        else{
+            buttonMonthTotal.setTypeface(null, Typeface.BOLD);
+            setMileageTextView(mControllerAggregateStats.getMonthlyMileage(distanceUnit),textViewWeekMonthAmountLabel);
+        }
+
         setMileageTextView(mControllerAggregateStats.getTotalMileage(distanceUnit), textViewTotalMileage);
         buttonEnterRun = findViewById(R.id.enter_run_button);
         setSupportActionBar((android.support.v7.widget.Toolbar) findViewById(R.id.my_toolbars));
@@ -68,15 +78,23 @@ public class ViewControllerHome extends AppCompatActivity {
         buttonWeekTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonWeekTotal.setTypeface(null, Typeface.BOLD);
+                buttonMonthTotal.setTypeface(null, Typeface.NORMAL);
                 getWeekTotal();
                 setTimePeriod("week");
+                editor.putString("com.jpdev.o2runninglog.period_selector", "week");
+                editor.apply();
             }
         });
         buttonMonthTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                buttonMonthTotal.setTypeface(null, Typeface.BOLD);
+                buttonWeekTotal.setTypeface(null, Typeface.NORMAL);
                 getMonthTotal();
                 setTimePeriod("month");
+                editor.putString("com.jpdev.o2runninglog.period_selector", "month");
+                editor.apply();
             }
         });
     }
