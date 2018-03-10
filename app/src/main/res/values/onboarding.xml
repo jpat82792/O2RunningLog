@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="onboard_welcome">
+        <item>
+            Welcome to O2 running!
+        </item>
+        <item>
+            Thanks for downloading O2 Running Log.
+            This app brings fresh air into drudgery of tracking your runs.
+            Press next to progress through the tutorial or skip if you want to start using the app.
+        </item>
+
+    </string-array>
+    <string-array name="onboard_home">
+        <item>
+            Home
+        </item>
+        <item>
+            Here you see your all-time total, monthly trend, and
+            mileage over a specific period. You can set that specific period to be the current week
+            or current month.
+            From here you can either press enter run to go to the run entry form or the calendar
+            icon to view the calendar.
+        </item>
+    </string-array>
+    <string-array name="onboard_run_form">
+        <item>
+            Run Form
+        </item>
+        <item>
+            Here you can enter all the information you want about your run. The only thing you must
+            enter for a run to be saved successfully is a distance or a time.
+        </item>
+    </string-array>
+    <string-array name="onboard_calendar">
+        <item>
+            Calendar
+        </item>
+        <item>
+            You can either select a previous run or create a new run if you forgot to log an
+            earlier day!
+        </item>
+    </string-array>
+</resources>

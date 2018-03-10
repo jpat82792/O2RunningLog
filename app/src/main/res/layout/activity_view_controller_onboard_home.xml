@@ -27,7 +27,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="119dp"
-        android:text="Thanks for downloading O2 Running Log. This app hope's to bring fresh air into drudgery of tracking your runs. Press next to progress through the tutorial or skip if you want to start using the app."
+        android:text=""
         android:textAlignment="center"
         android:textColor="@color/textColor"
         android:textSize="18sp"
