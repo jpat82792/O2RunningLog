@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#9CA2A5</color>
+    <color name="colorPrimary">#9ca2a5</color>
     <color name="colorPrimaryDark">#9CA2A5</color>
+    <color name="grayButtonPressed">#b8bdc0</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="backgroundColor">#F1F1F1</color>
+    <color name="backgroundColor">#f1f1f1</color>
     <color name="textColor">#000029</color>
     <color name="ctaButtonColor">#0A0A63</color>
+    <color name="ctaButtonColorPressed">#000093</color>
     <color name="alternateButtonColor">#31318e</color>
     <color name="hasRunColor">#8eb2ed</color>
     <color name="white">#FFFFFF</color>

@@ -267,7 +267,7 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@color/ctaButtonColor"
+        android:background="@drawable/cta_button"
         android:gravity="center"
         android:paddingVertical="10dp"
         android:text="Enter Run"

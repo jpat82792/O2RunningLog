@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jpdev.o2runninglog.ViewControllerOnboard"
     android:background="@color/backgroundColor"
-    >
+    tools:context="com.jpdev.o2runninglog.ViewControllerOnboard">
 
     <TextView
         android:id="@+id/onboard_title_text"
@@ -16,7 +15,7 @@
         android:gravity="center"
         android:text="O2 Running Log"
         android:textAlignment="center"
-        android:textColor="@color/ctaButtonColor"
+        android:textColor="@color/backgroundColor"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +49,11 @@
         style="?android:borderlessButtonStyle"
         android:layout_width="192dp"
         android:layout_height="wrap_content"
-        android:background="@color/alternateButtonColor"
-        android:textColor="@color/white"
+        android:background="@drawable/gray_button"
         android:letterSpacing="0.25"
         android:text="Skip"
         android:textAlignment="center"
+        android:textColor="@color/backgroundColor"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -64,11 +63,11 @@
         style="?android:borderlessButtonStyle"
         android:layout_width="192dp"
         android:layout_height="wrap_content"
-        android:background="@color/ctaButtonColor"
-        android:textColor="@color/white"
+        android:background="@drawable/cta_button"
         android:letterSpacing="0.25"
         android:text="Next"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/onboard_button_skip_onboard" />

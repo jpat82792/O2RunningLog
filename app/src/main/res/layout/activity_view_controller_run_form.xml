@@ -268,7 +268,7 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@color/ctaButtonColor"
+        android:background="@drawable/cta_button"
         android:text="Save Run"
         android:textAlignment="center"
         android:textAllCaps="false"
