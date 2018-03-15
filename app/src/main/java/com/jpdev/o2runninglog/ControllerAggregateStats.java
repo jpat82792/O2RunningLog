@@ -182,15 +182,6 @@ public class ControllerAggregateStats {
         double kilometers = mi*1.609344;
         return kilometers;
     }
-    public void parseDistances(Cursor cursorMiles, Cursor cursorKilo, double miles,
-                               double kilometers){
-        while(cursorMiles.moveToNext()){
-            miles = cursorMiles.getDouble(cursorMiles.getColumnIndexOrThrow("total"));
-        }
-        while(cursorKilo.moveToNext()){
-            kilometers = cursorKilo.getDouble(cursorKilo.getColumnIndexOrThrow("total"));
-        }
-    }
 
     public double getMonthlyMileage(String distanceUnit){
         DateTime startMonth = new DateTime();
