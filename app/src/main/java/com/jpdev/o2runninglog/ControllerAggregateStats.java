@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
@@ -239,8 +240,8 @@ public class ControllerAggregateStats {
     public double getWeeklyMileage(String distanceUnit){
         LocalDate today = new LocalDate();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        LocalDate weekStart =today.dayOfWeek().withMinimumValue();
-        LocalDate weekEnd = today.dayOfWeek().withMaximumValue();
+        LocalDate weekStart =today.withDayOfWeek(DateTimeConstants.SUNDAY);
+        LocalDate weekEnd = today.withDayOfWeek(DateTimeConstants.SUNDAY).plusDays(7);
         LocalTime localTime = new LocalTime();
         double weekMileTotal = 0;
         double weekKilometerTotal = 0;

@@ -160,6 +160,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
                     (long) timePickerTime.getDuration(), Integer.parseInt(editTextRating.getText().toString()),
                     editTextNotes.getText().toString(), mModelRun);
             Toast.makeText(ViewControllerRunForm.this, "Run updated", Toast.LENGTH_SHORT).show();
+            this.finish();
         } else {
             Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
         }
@@ -177,6 +178,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
                     Integer.parseInt(editTextRating.getText().toString()),
                     editTextNotes.getText().toString());
             Toast.makeText(ViewControllerRunForm.this, "Run saved", Toast.LENGTH_SHORT).show();
+            this.finish();
         }
         else{
             Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
