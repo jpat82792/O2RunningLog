@@ -3,6 +3,7 @@ package com.jpdev.o2runninglog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
@@ -226,10 +227,11 @@ public class ControllerAggregateStats {
     }
 
     public double getWeeklyMileage(String distanceUnit){
+        Log.d("FX", "getWeeklyMileage");
         LocalDate today = new LocalDate();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        LocalDate weekStart =today.withDayOfWeek(DateTimeConstants.SUNDAY);
-        LocalDate weekEnd = today.withDayOfWeek(DateTimeConstants.SUNDAY).plusDays(7);
+        LocalDate weekStart =today.minusWeeks(1).withDayOfWeek(DateTimeConstants.SUNDAY).minusDays(1);
+        LocalDate weekEnd = today.withDayOfWeek(DateTimeConstants.MONDAY).plusDays(5);
         LocalTime localTime = new LocalTime();
         double weekMileTotal = 0;
         double weekKilometerTotal = 0;
@@ -264,6 +266,9 @@ public class ControllerAggregateStats {
         else{
             weekMileTotal = convertMiToKm(weekMileTotal);
         }
+        Log.d("mileTotal:", Double.toString(weekMileTotal));
+        Log.d("kmTotal:", Double.toString(weekKilometerTotal));
+        Log.d("Total: ", Double.toString(weekTotal));
         weekTotal = (weekMileTotal + weekKilometerTotal);
         return weekTotal;
     }

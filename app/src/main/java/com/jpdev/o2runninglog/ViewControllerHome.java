@@ -138,6 +138,19 @@ public class ViewControllerHome extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(mSharedPreferences.getString("com.jpdev.o2runninglog.time_period", "month").equals("month")){
+            getMonthTotal();
+        }
+        else{
+            getWeekTotal();
+        }
+        TextView textViewTotalMileage = findViewById(R.id.total_mileage);
+        setMileageTextView(mControllerAggregateStats.getTotalMileage(distanceUnit), textViewTotalMileage);
+    }
+
     private void setMileageMeasurementLabels(String distanceUnit){
         textViewAllTimeLabel.setText(distanceUnit);
         textViewWeekMonthLabel.setText(distanceUnit);
