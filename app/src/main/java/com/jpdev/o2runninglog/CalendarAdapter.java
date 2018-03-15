@@ -73,6 +73,9 @@ public class CalendarAdapter extends CaldroidGridAdapter {
                     setCalendarDay(runMonth, runDay, dateMonth, dateYear, dateDay, view, run);
                 }
             }
+            if(!eventSet){
+                setCalendarDay(null, null, dateMonth, dateYear,dateDay, view, null);
+            }
         }
         else{
             Log.d("STATED:","none");
