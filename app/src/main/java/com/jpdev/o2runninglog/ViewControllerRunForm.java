@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -134,6 +135,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
     }
     //To add runs from past.
     private void setPreviousRun(){
+        Log.d("SET", "setPreviousRun()");
         int year = Integer.parseInt(stringYear);
         int month = Integer.parseInt(stringMonth)-1;
         int day = Integer.parseInt(stringDay);
@@ -154,7 +156,8 @@ public class ViewControllerRunForm extends AppCompatActivity {
         }
     }
     private void updatePreviousRun(){
-        if (!editTextDistance.getText().toString().equals("")) {
+        Log.d("SET", "updatePreviousRun()");
+        if (!editTextDistance.getText().toString().equals("0") || !(timePickerTime.getDuration() == 0)) {
             mControllerRunFormEntry.updateRun(editTextName.getText().toString(),
                     Integer.parseInt(editTextDistance.getText().toString()), unitSpinner.getSelectedItem().toString(),
                     (long) timePickerTime.getDuration(), Integer.parseInt(editTextRating.getText().toString()),
@@ -162,15 +165,16 @@ public class ViewControllerRunForm extends AppCompatActivity {
             Toast.makeText(ViewControllerRunForm.this, "Run updated", Toast.LENGTH_SHORT).show();
             this.finish();
         } else {
-            Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewControllerRunForm.this, "Please add a distance or a time", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void setNewRun(){
+        Log.d("SET", "setNewRun()");
         Date today = new Date();
         long currentTime;
         currentTime = today.getTime();
-        if(!editTextDistance.getText().toString().equals("")) {
+        if(!editTextDistance.getText().toString().equals("0") || !(timePickerTime.getDuration() == 0)) {
             mControllerRunFormEntry.createRun(editTextName.getText().toString(),
                     Integer.parseInt(editTextDistance.getText().toString()),
                     "mi",
@@ -181,7 +185,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
             this.finish();
         }
         else{
-            Toast.makeText(ViewControllerRunForm.this, "Please add a distance", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewControllerRunForm.this, "Please add a distance or a time", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -227,6 +231,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
     private void initializeEditTexts(Bundle bundle){
         editTextName = (EditText) findViewById(R.id.run_name_edittext);
         editTextDistance = (EditText) findViewById(R.id.run_distance_edittext);
+        editTextDistance.setText("0");
         timePickerTime = (TimeDurationPicker) findViewById(R.id.run_time_edittext);
         timePickerTime.setDuration(0);
         editTextRating = (EditText) findViewById(R.id.rating_widget_value);
@@ -235,7 +240,9 @@ public class ViewControllerRunForm extends AppCompatActivity {
         setSpinner();
         buttonShowPicker = findViewById(R.id.show_time_picker);
         if(bundle != null){
+            Log.d("bundle", "Bundle exists");
             if(bundle.get("month") == null) {
+                Log.d("bundle", "No month field");
                 String runJson;
                 runJson = bundle.getString("run");
                 ModelRun run = new Gson().fromJson(runJson, ModelRun.class);
@@ -245,6 +252,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 setModelRun(run);
             }
             else{
+                Log.d("bundle", "month field");
                 setTimeStrings(bundle.get("day").toString(), bundle.get("month").toString(),bundle.get("year").toString());
                 pastNoRecord = true;
             }

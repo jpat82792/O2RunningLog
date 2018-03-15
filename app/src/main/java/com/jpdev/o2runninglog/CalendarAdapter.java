@@ -114,24 +114,18 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         }
         else {
             if(runMonth != null && runDay != null) {
-                if (runMonth.equals(dateMonth) && runDay.equals(dateDay)) {
+                if (runMonth.equals(currentMonth) && runDay.equals(currentDay)) {
                     Log.d("EVERGO", "else if");
+                    Log.d("runMonth:", runMonth);
+                    Log.d("currentMonth", currentMonth);
+                    Log.d("runDay:", runDay);
+                    Log.d("currentDay:", currentDay);
                     imageView.setImageResource(R.drawable.active_circle);
                     imageView.setScaleX((float) 0.7);
                     imageView.setScaleY((float) 0.7);
                     imageView.setVisibility(View.VISIBLE);
                     ((TextView) cellView.findViewById(R.id.day_label)).setTextColor(Color.parseColor("#FFFFFF"));
                     setOpenRunForm(run, cellView);
-                    eventSet = true;
-                }
-                else{
-                    Log.d("EVERGO", "elsid");
-                    imageView.setImageResource(R.drawable.active_circle);
-                    imageView.setScaleX((float) 0.7);
-                    imageView.setScaleY((float) 0.7);
-                    imageView.setVisibility(View.VISIBLE);
-                    ((TextView) cellView.findViewById(R.id.day_label)).setTextColor(Color.parseColor("#FFFFFF"));
-                    setOpenRunFormNoRecord(dateDay, dateMonth, dateYear, cellView);
                     eventSet = true;
                 }
             }

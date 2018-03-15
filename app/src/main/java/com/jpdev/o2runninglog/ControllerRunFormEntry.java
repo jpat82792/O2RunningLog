@@ -51,9 +51,14 @@ public class ControllerRunFormEntry {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(O2RunningLogContract.RunsEntry.RUN_NAME, runName);
-        values.put(O2RunningLogContract.RunsEntry.DISTANCE, runDistance);
+        if(runDistance != 0) {
+            values.put(O2RunningLogContract.RunsEntry.DISTANCE, runDistance);
+        }
         values.put(O2RunningLogContract.RunsEntry.DISTANCE_UNITS, runDistanceUnits);
-        values.put(O2RunningLogContract.RunsEntry.TIME, runTime);
+        if(runTime != 0) {
+            values.put(O2RunningLogContract.RunsEntry.TIME, runTime);
+        }
+        values.put(O2RunningLogContract.RunsEntry.DISTANCE_UNITS, runDistanceUnits);
         values.put(O2RunningLogContract.RunsEntry.DATE, date);
         values.put(O2RunningLogContract.RunsEntry.RATING, rating);
         values.put(O2RunningLogContract.RunsEntry.NOTES, notes);
@@ -114,10 +119,15 @@ public class ControllerRunFormEntry {
                            long runTime, int rating, String notes, ModelRun id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
+
         values.put(O2RunningLogContract.RunsEntry.RUN_NAME, runName);
-        values.put(O2RunningLogContract.RunsEntry.DISTANCE, runDistance);
+        if(runDistance != 0) {
+            values.put(O2RunningLogContract.RunsEntry.DISTANCE, runDistance);
+        }
         values.put(O2RunningLogContract.RunsEntry.DISTANCE_UNITS, runDistanceUnits);
-        values.put(O2RunningLogContract.RunsEntry.TIME, runTime);
+        if(runTime != 0) {
+            values.put(O2RunningLogContract.RunsEntry.TIME, runTime);
+        }
         values.put(O2RunningLogContract.RunsEntry.DATE, id.getDate());
         values.put(O2RunningLogContract.RunsEntry.RATING, rating);
         values.put(O2RunningLogContract.RunsEntry.NOTES, notes);
