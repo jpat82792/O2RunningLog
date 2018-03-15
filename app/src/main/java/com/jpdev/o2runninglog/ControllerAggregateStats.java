@@ -166,12 +166,9 @@ public class ControllerAggregateStats {
         }
 
         if(distanceUnit.equals("mi")) {
-            //TODO: Add function to convert kilometers to miles
             kilometers = convertKmToMi(kilometers);
         }
         else{
-            //TODO: Add function to convert miles to kilometers
-            //parseDistances(cursorMiles, cursorKilo, miles, kilometers);
             miles = convertMiToKm(miles);
         }
         total = miles + kilometers;
