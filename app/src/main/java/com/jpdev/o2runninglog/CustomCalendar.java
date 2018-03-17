@@ -18,6 +18,11 @@ public class CustomCalendar extends CaldroidFragment {
         return R.layout.custom_grid_fragment;
     }
 
+    @Override
+    public void refreshView(){
+        super.refreshView();
+    }
+
     public CustomCalendar(){
         super();
     }

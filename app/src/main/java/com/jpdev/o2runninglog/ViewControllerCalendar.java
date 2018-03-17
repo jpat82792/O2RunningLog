@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +26,7 @@ public class ViewControllerCalendar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_controller_calendar);
         controllerRunFormEntry = new ControllerRunFormEntry(this, this);
-        CaldroidFragment caldroidFragment = new CustomCalendar();
+        final CaldroidFragment caldroidFragment = new CustomCalendar();
         Map<String, Object> extraData = caldroidFragment.getExtraData();
         extraData.put("MONTH_EVENTS", controllerRunFormEntry.getRuns());
         Bundle args = new Bundle();
@@ -49,6 +50,8 @@ public class ViewControllerCalendar extends AppCompatActivity {
 
             @Override
             public void onChangeMonth(int month, int year) {
+                Log.d("CHNGMONTH:", Integer.toString(month) + Integer.toString(year));
+                caldroidFragment.refreshView();
             }
 
             @Override

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         mContext = context;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -50,6 +52,20 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         TextView textViewDay = cellView.findViewById(R.id.day_label);
         DateTime dateTime = this.datetimeList.get(position);
         textViewDay.setText(Integer.toString(dateTime.getDay()));
+        Calendar cal = Calendar.getInstance();
+        TimeZone tz = cal.getTimeZone();
+        long date = dateTime.getMilliseconds(tz);
+        String dateMonth =(String)  DateFormat.format("MM", date);
+        String dateDay = (String) DateFormat.format("dd", date);
+        String dateYear = (String) DateFormat.format("yyyy", date);
+        Log.d("DATER: ", dateDay + dateMonth + dateYear);
+        if(cellView.findViewById(R.id.calendar_cell_background) != null) {
+            ImageView imageView = cellView.findViewById(R.id.calendar_cell_background);
+            //imageView.setImageResource(R.drawable.transparent_circle);
+            imageView.setVisibility(View.INVISIBLE);
+            TextView textView = cellView.findViewById(R.id.day_label);
+            textView.setTextColor(Color.parseColor("#444444"));
+        }
         setRunEvent(dateTime, runs, cellView);
         return cellView;
     }
@@ -63,40 +79,44 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         String dateYear = (String) DateFormat.format("yyyy", date);
         eventSet = false;
         if(runs.size() != 0) {
-            Log.d("STATED:","runs");
             for (int i = 0; i < runs.size(); i++) {
                 if(!eventSet){
                     ModelRun run = runs.get(i);
                     long runDate = run.getDate();
                     String runMonth = (String) DateFormat.format("MM", runDate);
                     String runDay = (String) DateFormat.format("dd", runDate);
-                    setCalendarDay(runMonth, runDay, dateMonth, dateYear, dateDay, view, run);
+                    String runYear = (String) DateFormat.format("yyyy", runDate);
+                    setCalendarDay(runYear, runMonth, runDay, dateMonth, dateYear, dateDay, view, run);
                 }
             }
             if(!eventSet){
-                setCalendarDay(null, null, dateMonth, dateYear,dateDay, view, null);
+                setCalendarDay(null, null, null, dateMonth, dateYear, dateDay, view, null);
             }
         }
         else{
-            Log.d("STATED:","none");
-            dateMonth =(String)  DateFormat.format("MM", date);
-            setCalendarDay(null, null, dateMonth, dateYear,dateDay, view, null);
+            setCalendarDay(null,null, null, dateMonth, dateYear, dateDay, view, null);
         }
     }
 
-    private void setCalendarDay(String runMonth, String runDay, String dateMonth, String dateYear ,String dateDay,
+    private void setCalendarDay(String runYear, String runMonth, String runDay, String dateMonth, String dateYear ,String dateDay,
                                 View cellView, ModelRun run){
         long currentTime = Calendar.getInstance().getTimeInMillis();
         SimpleDateFormat monthFormat = new java.text.SimpleDateFormat("MM");
         SimpleDateFormat dayFormat = new java.text.SimpleDateFormat("dd");
-        String currentMonth, currentDay;
+        SimpleDateFormat yearFormat = new java.text.SimpleDateFormat("yyyy");
+        String currentMonth, currentDay, currentYear;
+        currentYear = yearFormat.format(currentTime);
         currentMonth = monthFormat.format(currentTime);
         currentDay = dayFormat.format(currentTime);
         ImageView imageView;
         imageView = cellView.findViewById(R.id.calendar_cell_background);
-        if (!(currentDay.equals(dateDay) && currentMonth.equals(dateMonth))) {
-            if(runMonth != null && runDay != null) {
-                if (runMonth.equals(dateMonth) && runDay.equals(dateDay)) {
+        if (!(currentDay.equals(dateDay) && currentMonth.equals(dateMonth) && currentYear.equals(dateYear))) {
+            if(runMonth != null && runDay != null && runYear != null) {
+                if (runMonth.equals(dateMonth) && runDay.equals(dateDay) && runYear.equals(dateYear)) {
+                    Log.d("STATE:", "LIGHTBLUE");
+                    Log.d("YEAR: ", dateYear);
+                    Log.d("MONTH: ", dateMonth);
+                    Log.d("DAY: ", dateDay);
                     imageView.setImageResource(R.drawable.run_event_background);
                     imageView.setScaleX((float) 0.7);
                     imageView.setScaleY((float) 0.7);
@@ -106,23 +126,20 @@ public class CalendarAdapter extends CaldroidGridAdapter {
                     eventSet = true;
                 }
                 else {
-                    Log.d("EVERGO","tiny dancer");
                     setOpenRunFormNoRecord(dateDay, dateMonth, dateYear, cellView);
                 }
             }
             else {
-                Log.d("EVERGO","tiny dancer");
                 setOpenRunFormNoRecord(dateDay, dateMonth, dateYear, cellView);
             }
         }
         else {
             if(runMonth != null && runDay != null) {
-                if (runMonth.equals(currentMonth) && runDay.equals(currentDay)) {
-                    Log.d("EVERGO", "else if");
-                    Log.d("runMonth:", runMonth);
-                    Log.d("currentMonth", currentMonth);
-                    Log.d("runDay:", runDay);
-                    Log.d("currentDay:", currentDay);
+                if (runMonth.equals(currentMonth) && runDay.equals(currentDay) && runYear.equals(dateYear)) {
+                    Log.d("STATE:", "BLUE");
+                    Log.d("YEAR: ", dateYear);
+                    Log.d("MONTH: ", dateMonth);
+                    Log.d("DAY: ", dateDay);
                     imageView.setImageResource(R.drawable.active_circle);
                     imageView.setScaleX((float) 0.7);
                     imageView.setScaleY((float) 0.7);
@@ -134,7 +151,10 @@ public class CalendarAdapter extends CaldroidGridAdapter {
             }
             else {
                 if(currentDay.equals(dateDay) && currentMonth.equals(dateMonth)) {
-                    Log.d("EVERGO", "elsie");
+                    Log.d("STATE:", "BLUE");
+                    Log.d("YEAR: ", dateYear);
+                    Log.d("MONTH: ", dateMonth);
+                    Log.d("DAY: ", dateDay);
                     imageView.setImageResource(R.drawable.active_circle);
                     imageView.setScaleX((float) 0.7);
                     imageView.setScaleY((float) 0.7);

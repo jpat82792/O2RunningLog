@@ -11,4 +11,5 @@
     <color name="alternateButtonColor">#31318e</color>
     <color name="hasRunColor">#8eb2ed</color>
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>
