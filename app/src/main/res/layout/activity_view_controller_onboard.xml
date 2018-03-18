@@ -35,8 +35,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/onboard_button_skip_onboard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <ImageView
