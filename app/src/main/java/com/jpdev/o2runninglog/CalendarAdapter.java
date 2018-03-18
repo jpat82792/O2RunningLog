@@ -2,11 +2,7 @@ package com.jpdev.o2runninglog;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
-
-import android.graphics.drawable.ColorDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +54,6 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         String dateMonth =(String)  DateFormat.format("MM", date);
         String dateDay = (String) DateFormat.format("dd", date);
         String dateYear = (String) DateFormat.format("yyyy", date);
-        Log.d("DATER: ", dateDay + dateMonth + dateYear);
         if(cellView.findViewById(R.id.calendar_cell_background) != null) {
             ImageView imageView = cellView.findViewById(R.id.calendar_cell_background);
             //imageView.setImageResource(R.drawable.transparent_circle);
@@ -132,10 +127,6 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         else {
             if(runMonth != null && runDay != null) {
                 if (runMonth.equals(currentMonth) && runDay.equals(currentDay) && runYear.equals(dateYear)) {
-                    Log.d("STATE:", "BLUE");
-                    Log.d("YEAR: ", dateYear);
-                    Log.d("MONTH: ", dateMonth);
-                    Log.d("DAY: ", dateDay);
                     imageView.setImageResource(R.drawable.active_circle);
                     imageView.setScaleX((float) 0.7);
                     imageView.setScaleY((float) 0.7);
@@ -147,10 +138,6 @@ public class CalendarAdapter extends CaldroidGridAdapter {
             }
             else {
                 if(currentDay.equals(dateDay) && currentMonth.equals(dateMonth)) {
-                    Log.d("STATE:", "BLUE");
-                    Log.d("YEAR: ", dateYear);
-                    Log.d("MONTH: ", dateMonth);
-                    Log.d("DAY: ", dateDay);
                     imageView.setImageResource(R.drawable.active_circle);
                     imageView.setScaleX((float) 0.7);
                     imageView.setScaleY((float) 0.7);
@@ -167,7 +154,6 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         cellView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("MID::","setOpenRunFormNoRecord");
                 Intent runFormIntent = new Intent(mContext, ViewControllerRunForm.class);
                 runFormIntent.putExtra("day", day);
                 runFormIntent.putExtra("month", month);
@@ -181,7 +167,6 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         cellView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("MID::","setOpenRunForm");
                 Intent runFormIntent = new Intent(mContext, ViewControllerRunForm.class);
                 runFormIntent.putExtra("run", new Gson().toJson(finalRun));
                 runFormIntent.setAction(new Gson().toJson(finalRun));

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,14 +24,9 @@ public class ViewControllerOnboard extends AppCompatActivity {
         boolean tutorialComplete = mSharedPreferences.getBoolean("com.jpdev.o2runninglog.tutorial", false);
 
         if(tutorialComplete){
-            Log.d("Tutorial", "yep, got here");
             startActivity(new Intent(this, ViewControllerHome.class));
             this.finish();
         }
-        else{
-            Log.d("Tutorial", "Ugh really?");
-        }
-
         setUIElements();
         setElementsValues();
         setButtons();

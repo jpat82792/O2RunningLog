@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -125,23 +124,16 @@ public class ViewControllerRunForm extends AppCompatActivity {
     }
 
     private void setDeleteRunPopup(final AlertDialog.Builder builder){
-        Log.d("DELELE", "set");
         Button deleteButton = findViewById(R.id.delete_run_prompt);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Pressed","me");
-// 1. Instantiate an AlertDialog.Builder with its constructor
-
-
-// 2. Chain together various setter methods to set the dialog characteristics
                 builder.setMessage("Are you sure you want delete this run? This cannot be undone")
                         .setTitle("Delete Run?");
 
                 builder.setPositiveButton("Delete run", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
-                        Log.d("dialog", "Delete the run");
                         int runId = mModelRun.getId();
                         mControllerRunFormEntry.deleteRun(runId);
                         viewControllerRunForm.setResult(RESULT_OK, null);
@@ -151,12 +143,8 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                        Log.d("dialog", "Cancel this delete");
                     }
                 });
-
-// 3. Get the AlertDialog from create()
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
@@ -183,7 +171,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
     }
     //To add runs from past.
     private void setPreviousRun(){
-        Log.d("SET", "setPreviousRun()");
         int year = Integer.parseInt(stringYear);
         int month = Integer.parseInt(stringMonth)-1;
         int day = Integer.parseInt(stringDay);
@@ -204,7 +191,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
         }
     }
     private void updatePreviousRun(){
-        Log.d("SET", "updatePreviousRun()");
         if (!editTextDistance.getText().toString().equals("0") || !(timePickerTime.getDuration() == 0)) {
             mControllerRunFormEntry.updateRun(editTextName.getText().toString(),
                     Integer.parseInt(editTextDistance.getText().toString()), unitSpinner.getSelectedItem().toString(),
@@ -218,7 +204,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
     }
 
     private void setNewRun(){
-        Log.d("SET", "setNewRun()");
         Date today = new Date();
         long currentTime;
         currentTime = today.getTime();
@@ -295,9 +280,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
         setSpinner();
         buttonShowPicker = findViewById(R.id.show_time_picker);
         if(bundle != null){
-            Log.d("bundle", "Bundle exists");
             if(bundle.get("month") == null) {
-                Log.d("bundle", "No month field");
                 String runJson;
                 runJson = bundle.getString("run");
                 ModelRun run = new Gson().fromJson(runJson, ModelRun.class);
@@ -307,7 +290,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
                 setModelRun(run);
             }
             else{
-                Log.d("bundle", "month field");
                 setTimeStrings(bundle.get("day").toString(), bundle.get("month").toString(),bundle.get("year").toString());
                 pastNoRecord = true;
             }

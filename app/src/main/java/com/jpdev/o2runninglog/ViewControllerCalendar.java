@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,7 +52,6 @@ public class ViewControllerCalendar extends AppCompatActivity {
 
             @Override
             public void onChangeMonth(int month, int year) {
-                Log.d("CHNGMONTH:", Integer.toString(month) + Integer.toString(year));
                 caldroidFragment.refreshView();
             }
 
@@ -90,7 +88,6 @@ public class ViewControllerCalendar extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
-            Log.d("Get here?", "ok");
             Intent intent = getIntent();
             finish();
             startActivity(intent);
