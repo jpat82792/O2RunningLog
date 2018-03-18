@@ -1,8 +1,11 @@
 package com.jpdev.o2runninglog;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,12 +71,15 @@ public class ViewControllerRunForm extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         existing = false;
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorPrimary)));
-
+        final ViewControllerRunForm viewControllerRunForm = this;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        Context contect = getBaseContext();
         if(mModelRun == null) {
             //TODO:checkForRun needs to check bundle date if one exists
             if(extras != null) {
                 if (extras.get("month") != null) {
                     existing = true;
+
                 } else {
                     mModelRun = mControllerRunFormEntry.checkForRun();
                 }
@@ -84,6 +90,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
         }
         if(mModelRun != null){
             setEditTextContent(editTextName, editTextDistance, unitSpinner, timePickerTime, editTextRating, editTextNotes, mModelRun);
+            setDeleteRunPopup(builder);
             existing = true;
         }
         setSpinner();
@@ -111,6 +118,42 @@ public class ViewControllerRunForm extends AppCompatActivity {
                     showPicker = true;
                     buttonShowPicker.setText(TimeDurationUtil.formatHoursMinutesSeconds(timePickerTime.getDuration()));
                 }
+            }
+        });
+    }
+
+    private void setDeleteRunPopup(final AlertDialog.Builder builder){
+        Log.d("DELELE", "set");
+        Button deleteButton = findViewById(R.id.delete_run_prompt);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Pressed","me");
+// 1. Instantiate an AlertDialog.Builder with its constructor
+
+
+// 2. Chain together various setter methods to set the dialog characteristics
+                builder.setMessage("Are you sure you want delete this run? This cannot be undone")
+                        .setTitle("Delete Run?");
+
+                builder.setPositiveButton("Delete run", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                        Log.d("dialog", "Delete the run");
+                        int runId = mModelRun.getId();
+
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                        Log.d("dialog", "Cancel this delete");
+                    }
+                });
+
+// 3. Get the AlertDialog from create()
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
     }

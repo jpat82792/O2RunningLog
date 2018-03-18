@@ -79,8 +79,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:layout_gravity="right"
+                android:gravity="right">
 
+                <Button
+                    android:id="@+id/delete_run_prompt"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/delete_button"
+                    android:text="Delete run?"
+                    android:textColor="@color/backgroundColor" />
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
