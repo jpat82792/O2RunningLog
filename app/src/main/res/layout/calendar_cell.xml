@@ -14,7 +14,7 @@
         android:visibility="invisible"
         android:scaleX=".8"
         android:scaleY=".8"/>
-    <TextView
+    <com.jpdev.o2runninglog.CustomUiElements.O2TextView
         android:gravity="top"
         android:id="@+id/day_label"
         android:layout_width="match_parent"

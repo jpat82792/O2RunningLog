@@ -22,9 +22,11 @@ public class ViewControllerCalendar extends AppCompatActivity {
     private CaldroidListener calendarListener;
     private ControllerRunFormEntry controllerRunFormEntry;
     private CaldroidFragment caldroidFragment;
+    private Bundle savedBundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        savedBundle = savedInstanceState;
         setContentView(R.layout.activity_view_controller_calendar);
         controllerRunFormEntry = new ControllerRunFormEntry(this, this);
         caldroidFragment = new CustomCalendar();
@@ -65,6 +67,11 @@ public class ViewControllerCalendar extends AppCompatActivity {
         };
         caldroidFragment.setCaldroidListener(calendarListener);
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+
+    }
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = super.getMenuInflater();
         inflater.inflate(R.menu.menu_options, menu);
@@ -83,11 +90,10 @@ public class ViewControllerCalendar extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
-            Intent refresh = new Intent(this, ViewControllerCalendar.class);
-            startActivity(refresh);
-            caldroidFragment.refreshView();
-
-            this.finish();
+            Log.d("Get here?", "ok");
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
         }
     }
     public void onDestroy(){

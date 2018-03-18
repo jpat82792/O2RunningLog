@@ -47,6 +47,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
     private Button buttonShowPicker;
     private String stringDay, stringMonth, stringYear;
     private boolean existing;
+    private ViewControllerRunForm viewControllerRunForm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
         setContentView(R.layout.activity_view_controller_run_form);
         mModelRun = null;
         pastNoRecord = false;
+        viewControllerRunForm = this;
         View calendarButton = findViewById(R.id.calendar_icon_home);
         View goBackButton = findViewById(R.id.imageView);
         LinearLayout starContainer = findViewById(R.id.rating_widget_container);
@@ -142,6 +144,8 @@ public class ViewControllerRunForm extends AppCompatActivity {
                         Log.d("dialog", "Delete the run");
                         int runId = mModelRun.getId();
                         mControllerRunFormEntry.deleteRun(runId);
+                        viewControllerRunForm.setResult(RESULT_OK, null);
+                        Toast.makeText(ViewControllerRunForm.this, "Run deleted", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

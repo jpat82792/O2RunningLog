@@ -113,10 +113,6 @@ public class CalendarAdapter extends CaldroidGridAdapter {
         if (!(currentDay.equals(dateDay) && currentMonth.equals(dateMonth) && currentYear.equals(dateYear))) {
             if(runMonth != null && runDay != null && runYear != null) {
                 if (runMonth.equals(dateMonth) && runDay.equals(dateDay) && runYear.equals(dateYear)) {
-                    Log.d("STATE:", "LIGHTBLUE");
-                    Log.d("YEAR: ", dateYear);
-                    Log.d("MONTH: ", dateMonth);
-                    Log.d("DAY: ", dateDay);
                     imageView.setImageResource(R.drawable.run_event_background);
                     imageView.setScaleX((float) 0.7);
                     imageView.setScaleY((float) 0.7);
