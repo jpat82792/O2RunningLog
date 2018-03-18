@@ -7,7 +7,7 @@
     android:background="@color/backgroundColor"
     tools:context="com.jpdev.o2runninglog.ViewControllerOnboard">
 
-    <TextView
+    <com.jpdev.o2runninglog.CustomUiElements.O2TextViewBold
         android:id="@+id/onboard_title_text"
         android:layout_width="match_parent"
         android:layout_height="41dp"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.jpdev.o2runninglog.CustomUiElements.O2TextViewBold
         android:id="@+id/onboard_description_text"
         android:layout_width="324dp"
         android:layout_height="wrap_content"
