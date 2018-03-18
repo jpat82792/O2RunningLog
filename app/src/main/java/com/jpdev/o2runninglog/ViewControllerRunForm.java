@@ -218,7 +218,15 @@ public class ViewControllerRunForm extends AppCompatActivity {
         Date today = new Date();
         long currentTime;
         currentTime = today.getTime();
-        if(!editTextDistance.getText().toString().equals("0") || !(timePickerTime.getDuration() == 0)) {
+        boolean validInt = false;
+        try{
+            Integer.parseInt(editTextDistance.getText().toString());
+            validInt = true;
+        }
+        catch(Exception exception){
+            validInt = false;
+        }
+        if(validInt || !(timePickerTime.getDuration() == 0)) {
             mControllerRunFormEntry.createRun(editTextName.getText().toString(),
                     Integer.parseInt(editTextDistance.getText().toString()),
                     "mi",
@@ -275,7 +283,6 @@ public class ViewControllerRunForm extends AppCompatActivity {
     private void initializeEditTexts(Bundle bundle){
         editTextName = (EditText) findViewById(R.id.run_name_edittext);
         editTextDistance = (EditText) findViewById(R.id.run_distance_edittext);
-        editTextDistance.setText("0");
         timePickerTime = (TimeDurationPicker) findViewById(R.id.run_time_edittext);
         timePickerTime.setDuration(0);
         editTextRating = (EditText) findViewById(R.id.rating_widget_value);
