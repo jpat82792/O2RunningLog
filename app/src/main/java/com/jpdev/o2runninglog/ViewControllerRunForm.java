@@ -141,7 +141,8 @@ public class ViewControllerRunForm extends AppCompatActivity {
                         // User clicked OK button
                         Log.d("dialog", "Delete the run");
                         int runId = mModelRun.getId();
-
+                        mControllerRunFormEntry.deleteRun(runId);
+                        finish();
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

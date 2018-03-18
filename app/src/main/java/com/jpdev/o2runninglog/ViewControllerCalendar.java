@@ -21,12 +21,13 @@ import java.util.Map;
 public class ViewControllerCalendar extends AppCompatActivity {
     private CaldroidListener calendarListener;
     private ControllerRunFormEntry controllerRunFormEntry;
+    private CaldroidFragment caldroidFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_controller_calendar);
         controllerRunFormEntry = new ControllerRunFormEntry(this, this);
-        final CaldroidFragment caldroidFragment = new CustomCalendar();
+        caldroidFragment = new CustomCalendar();
         Map<String, Object> extraData = caldroidFragment.getExtraData();
         extraData.put("MONTH_EVENTS", controllerRunFormEntry.getRuns());
         Bundle args = new Bundle();
@@ -84,6 +85,8 @@ public class ViewControllerCalendar extends AppCompatActivity {
         if(resultCode==RESULT_OK) {
             Intent refresh = new Intent(this, ViewControllerCalendar.class);
             startActivity(refresh);
+            caldroidFragment.refreshView();
+
             this.finish();
         }
     }

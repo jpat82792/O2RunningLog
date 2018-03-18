@@ -78,6 +78,14 @@ public class ControllerRunFormEntry {
         return getArrayListRuns();
     }
 
+    public int deleteRun(int delete){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String selection = O2RunningLogContract.RunsEntry._ID + " = ?";
+        String[] selectionArgs = {Integer.toString(delete)};
+        int deletedRow = db.delete(O2RunningLogContract.RunsEntry.TABLE_NAME, selection, selectionArgs);
+        return deletedRow;
+    }
+
     public ModelRun checkForRun(){
         ModelRun run = null;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
