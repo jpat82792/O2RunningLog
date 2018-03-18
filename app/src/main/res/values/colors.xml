@@ -12,4 +12,5 @@
     <color name="hasRunColor">#8eb2ed</color>
     <color name="white">#FFFFFF</color>
     <color name="transparent">#00000000</color>
+    <color name="delete_color">#721616</color>
 </resources>
