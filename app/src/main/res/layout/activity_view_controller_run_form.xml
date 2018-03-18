@@ -150,7 +150,7 @@
                     android:layout_weight="9.4"
                     android:hint="Distance"
                     android:inputType="numberDecimal"
-                    android:nextFocusDown="@id/run_time_edittext"
+                    android:imeOptions="actionDone"
                     android:backgroundTint="@color/ctaButtonColorPressed"
                     app:backgroundTint="@color/ctaButtonColorPressed"/>
             </TableRow>
@@ -176,7 +176,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColor"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp"
+                    android:nextFocusDown="@id/show_time_picker"/>
             </TableRow>
 
             <TableRow
@@ -203,7 +204,8 @@
                     android:layout_weight="1"
                     android:text="Enter Time"
                     android:textColor="@color/backgroundColor"
-                    android:background="@drawable/cta_button"/>
+                    android:background="@drawable/cta_button"
+                    android:nextFocusDown="@id/rating_widget_container"/>
             </TableRow>
             <mobi.upod.timedurationpicker.TimeDurationPicker
                 android:id="@+id/run_time_edittext"
@@ -279,6 +281,7 @@
                     android:maxLines="10"
                     android:backgroundTint="@color/ctaButtonColorPressed"
                     app:backgroundTint="@color/ctaButtonColorPressed"
+                    android:imeOptions="actionDone"
                     />
 
             </ScrollView>
