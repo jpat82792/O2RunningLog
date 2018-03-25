@@ -325,7 +325,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
         editTextNotes.setText(run.getNotes());
         Adapter adapter = spinnerDistanceUnit.getAdapter();
         for (int i = 0; i < spinnerDistanceUnit.getAdapter().getCount(); i++){
-            if(adapter.getItem(i).equals(spinnerDistanceUnit)){
+            if(adapter.getItem(i).equals(run.getDistanceUnits())){
                 spinnerDistanceUnit.setSelection(i);
             }
         }
