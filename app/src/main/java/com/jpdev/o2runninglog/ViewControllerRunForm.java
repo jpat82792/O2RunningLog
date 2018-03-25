@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,8 @@ public class ViewControllerRunForm extends AppCompatActivity {
     private String stringDay, stringMonth, stringYear;
     private boolean existing;
     private ViewControllerRunForm viewControllerRunForm;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class ViewControllerRunForm extends AppCompatActivity {
         mModelRun = null;
         pastNoRecord = false;
         viewControllerRunForm = this;
+        mSharedPreferences = this.getSharedPreferences("com.jpdev.o2runninglog", Context.MODE_PRIVATE);
+        editor = mSharedPreferences.edit();
         View calendarButton = findViewById(R.id.calendar_icon_home);
         View goBackButton = findViewById(R.id.imageView);
         LinearLayout starContainer = findViewById(R.id.rating_widget_container);
@@ -69,6 +74,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
         buttonSubmit = (Button) findViewById(R.id.run_form_submit);
         editTexts = new ArrayList<EditText>();
         initializeEditTexts(extras);
+        setSpinner();
         mControllerRunFormEntry = new ControllerRunFormEntry(this, this);
         setSupportActionBar((android.support.v7.widget.Toolbar)findViewById(R.id.my_toolbars));
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -96,7 +102,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
             setDeleteRunPopup(builder);
             existing = true;
         }
-        setSpinner();
+
         buttonSubmit.setOnClickListener(setButtonSubmitListener(existing, pastNoRecord));
 
         showPicker = true;
@@ -158,6 +164,15 @@ public class ViewControllerRunForm extends AppCompatActivity {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.distance_options, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         unitSpinner.setAdapter(adapter);
+        boolean unit = mSharedPreferences.getBoolean("com.jpdev.o2runninglog.distance_units", false);
+        if(unit){
+            //distanceUnit = "km";
+            unitSpinner.setSelection(1);
+        }
+        else{
+            unitSpinner.setSelection(0);
+            //distanceUnit="mi";
+        }
     }
 
     public void setModelRun(ModelRun run){
