@@ -196,7 +196,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
         long dateRun = calendarDate.getTimeInMillis();
         if(!editTextDistance.getText().toString().equals("")) {
             mControllerRunFormEntry.createRun(editTextName.getText().toString(),
-                    Integer.parseInt(editTextDistance.getText().toString()),
+                    Float.parseFloat(editTextDistance.getText().toString()),
                     "mi",
                     (long) timePickerTime.getDuration(), dateRun,
                     Integer.parseInt(editTextRating.getText().toString()),
@@ -210,7 +210,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
     private void updatePreviousRun(){
         if (!editTextDistance.getText().toString().equals("0") || !(timePickerTime.getDuration() == 0)) {
             mControllerRunFormEntry.updateRun(editTextName.getText().toString(),
-                    Integer.parseInt(editTextDistance.getText().toString()), unitSpinner.getSelectedItem().toString(),
+                    Float.parseFloat(editTextDistance.getText().toString()), unitSpinner.getSelectedItem().toString(),
                     (long) timePickerTime.getDuration(), Integer.parseInt(editTextRating.getText().toString()),
                     editTextNotes.getText().toString(), mModelRun);
             Toast.makeText(ViewControllerRunForm.this, "Run updated", Toast.LENGTH_SHORT).show();
@@ -226,7 +226,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
         currentTime = today.getTime();
         boolean validInt = false;
         try{
-            Integer.parseInt(editTextDistance.getText().toString());
+            Float.parseFloat(editTextDistance.getText().toString());
             validInt = true;
         }
         catch(Exception exception){
@@ -234,7 +234,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
         }
         if(validInt || !(timePickerTime.getDuration() == 0)) {
             mControllerRunFormEntry.createRun(editTextName.getText().toString(),
-                    Integer.parseInt(editTextDistance.getText().toString()),
+                    Float.parseFloat(editTextDistance.getText().toString()),
                     "mi",
                     (long) timePickerTime.getDuration(), currentTime,
                     Integer.parseInt(editTextRating.getText().toString()),
@@ -319,7 +319,7 @@ public class ViewControllerRunForm extends AppCompatActivity {
                                     TimeDurationPicker editTextTime,EditText editTextRating,
                                     EditText editTextNotes, ModelRun run){
         editTextName.setText(run.getName());
-        editTextDistance.setText(Long.toString(run.getDistance()));
+        editTextDistance.setText(Float.toString(run.getDistance()));
         editTextTime.setDuration(run.getTime());
         editTextRating.setText(Integer.toString(run.getRating()));
         editTextNotes.setText(run.getNotes());

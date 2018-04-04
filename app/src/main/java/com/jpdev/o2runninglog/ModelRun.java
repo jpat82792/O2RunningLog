@@ -6,19 +6,20 @@ package com.jpdev.o2runninglog;
 
 public class ModelRun {
     private String mName, mNotes, mDistanceUnits;
-    private long mDistance, mDate, mTime;
+    private long mDate, mTime;
+    private float mDistance;
     private int mRating;
     private int mId;
-    public ModelRun(String name, long distance, String distanceUnits, long time, int rating,
+    public ModelRun(String name, float distance, String distanceUnits, long time, int rating,
                     long date, String notes){
         setUniversalProperties(name, distance, distanceUnits, time, rating, date, notes);
     }
-    public ModelRun(String name, long distance, String distanceUnits, long time, int rating,
+    public ModelRun(String name, float distance, String distanceUnits, long time, int rating,
                     long date, String notes, int id){
         setUniversalProperties(name, distance, distanceUnits, time, rating, date, notes);
         setId(id);
     }
-    private void setUniversalProperties(String name, long distance, String distanceUnits, long time, int rating,
+    private void setUniversalProperties(String name, float distance, String distanceUnits, long time, int rating,
                                         long date, String notes){
         setName(name);
         setTime(time);
@@ -46,7 +47,7 @@ public class ModelRun {
     private void setNotes(String notes){
         mNotes = notes;
     }
-    private void setDistance(long distance){
+    private void setDistance(float distance){
         mDistance = distance;
     }
     private void setDistanceUnits(String distanceUnits){
@@ -65,7 +66,7 @@ public class ModelRun {
     public String getNotes(){
         return mNotes;
     }
-    public long getDistance(){
+    public float getDistance(){
         return mDistance;
     }
     public long getDate(){

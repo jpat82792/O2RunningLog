@@ -46,7 +46,7 @@ public class ControllerRunFormEntry {
         return arrayListRuns;
     }
 
-    public void createRun(String runName, double runDistance, String runDistanceUnits,
+    public void createRun(String runName, float runDistance, String runDistanceUnits,
                           long runTime, long date, int rating, String notes){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -109,7 +109,7 @@ public class ControllerRunFormEntry {
                     String name = cursor.getString(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.RUN_NAME));
                     String notes = cursor.getString(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.NOTES));
                     int rating = cursor.getInt(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.RATING));
-                    int distance = cursor.getInt(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DISTANCE));
+                    float distance = cursor.getFloat(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DISTANCE));
                     String distanceUnits = cursor.getString(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DISTANCE_UNITS));
                     long time = cursor.getLong(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.TIME));
                     long dateFrom = cursor.getLong(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DATE));
@@ -123,7 +123,7 @@ public class ControllerRunFormEntry {
         return run;
     }
 
-    public void updateRun(String runName, double runDistance, String runDistanceUnits,
+    public void updateRun(String runName, float runDistance, String runDistanceUnits,
                            long runTime, int rating, String notes, ModelRun id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -147,7 +147,7 @@ public class ControllerRunFormEntry {
     private void addRunToArrayList(Cursor cursor){
         String runName = cursor.getString(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.RUN_NAME));
         int runId = cursor.getInt(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry._ID));
-        long runDistance = cursor.getLong(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DISTANCE));
+        float runDistance = cursor.getFloat(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DISTANCE));
         String runDistanceUnits = cursor.getString(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.DISTANCE_UNITS));
         long runTime = cursor.getLong(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.TIME));
         int runRating = cursor.getInt(cursor.getColumnIndexOrThrow(O2RunningLogContract.RunsEntry.RATING));

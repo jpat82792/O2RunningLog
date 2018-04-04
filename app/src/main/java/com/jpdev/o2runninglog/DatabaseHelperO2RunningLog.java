@@ -30,7 +30,7 @@ public class DatabaseHelperO2RunningLog extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_RUNS);
     }
 
-    public void  onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
         db.execSQL(SQL_DELETE_RUNS);
         onCreate(db);
     }
